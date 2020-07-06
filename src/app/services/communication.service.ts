@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class CommunicationService {
 
-  private readonly urlEndpoint = 'http://www.recipepuppy.com/api/';
+  private readonly urlEndpoint = '/api/';
 
   constructor(private http: HttpClient) { }
 
