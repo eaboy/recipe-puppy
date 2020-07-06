@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'recipe-puppy';
+
+  searchForm = new FormGroup({
+    course: new FormControl(),
+    ingredients: new FormControl()
+  });
+
+  doSearch(): void { }
+
 }
