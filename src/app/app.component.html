@@ -1,7 +1,11 @@
 <main>
   <form [formGroup]="searchForm" (ngSubmit)="doSearch()">
+    <label for="course">Search by course:</label>
     <input type="text" name="course" id="course" formControlName="course" placeholder="omelet">
+    <label for="ingredients">Search by ingredients (comma separated)<sup>*</sup>:</label>
     <input type="text" name="ingredients" id="ingredients" formControlName="ingredients"
       placeholder="onions, garlic...">
+    <p><sup>*</sup>Exclude an ingredient preceding it by a hyphen</p>
+    <button type="submit" [disabled]="searching">Search</button>
   </form>
 </main>
