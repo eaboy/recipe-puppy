@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Recipe, SearchParams } from './interfaces/recipe.interfaces';
 import { CommunicationService } from './services/communication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription, Subject } from 'rxjs';
+import { skip, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   searching = false;
   recipes: Recipe[];
   thereAreMoreRecipes = true;
   private page = 1;
+  private queryParamsSubscription: Subscription;
+  private searchSubject = new Subject();
 
   searchForm = new FormGroup({
     course: new FormControl(),
@@ -24,9 +28,25 @@ export class AppComponent {
   constructor(
     private communicationService: CommunicationService,
     private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
+  ngOnInit(): void {
+    this.queryParamsSubscription = this.route.queryParams.pipe(skip(1)).subscribe((params) => {
+      if (params.course || params.ingredients || params.page !== 1) {
+        const page = Number.parseInt(params.page, 10);
+        this.searchForm.controls.course.setValue(params.course);
+        this.searchForm.controls.ingredients.setValue(params.ingredients?.join(', '));
+        this.searchSubject.pipe(take(page - 1)).subscribe(() => {
+          this.doLoadMore();
+        });
+        this.doSearch();
+      }
+    });
+  }
+
   doSearch(): void {
+    this.queryParamsSubscription.unsubscribe();
     this.searching = true;
     this.recipes = [];
     this.page = 1;
