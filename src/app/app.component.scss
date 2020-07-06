@@ -1,0 +1,58 @@
+main {
+  padding: 20px;
+}
+
+form {
+  padding: 30px 0;
+  width: 250px;
+}
+
+main,
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin: 20px 0 10px;
+}
+
+input {
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  padding: 10px;
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
+}
+
+p {
+  box-sizing: border-box;
+  font-size: 0.5rem;
+  margin: 0;
+}
+
+input,
+label,
+p {
+  width: 100%;
+}
+
+button {
+  background-color: lightskyblue;
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 20px 0;
+  padding: 10px 20px;
+
+  &:hover,
+  &:focus {
+    background-color: dodgerblue;
+    border-color: steelblue;
+    color: white;
+  }
+}
