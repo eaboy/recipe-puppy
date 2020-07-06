@@ -12,6 +12,8 @@ export class AppComponent {
 
   searching = false;
   recipes: Recipe[];
+  thereAreMoreRecipes = true;
+  private page = 1;
 
   searchForm = new FormGroup({
     course: new FormControl(),
@@ -23,16 +25,30 @@ export class AppComponent {
   doSearch(): void {
     this.searching = true;
     this.recipes = [];
+    this.page = 1;
+    this.requestRecipes();
+  }
+
+  private requestRecipes(): void {
     const searchParams: SearchParams = {
       course: this.searchForm.value.course,
       ingredients: this.searchForm.value.ingredients?.split(',').map((ingredient: string) => ingredient.trim()),
-      page: 1
+      page: this.page,
     };
     this.communicationService.search(searchParams).subscribe((recipes: Recipe[]) => {
-      console.log(recipes);
+      if (recipes.length === 10) {
+        this.thereAreMoreRecipes = true;
+      } else {
+        this.thereAreMoreRecipes = false;
+      }
       this.searching = false;
       this.recipes = this.recipes.concat(recipes);
     });
+  }
+
+  doLoadMore(): void {
+    this.page++;
+    this.requestRecipes();
   }
 
 }

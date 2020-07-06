@@ -11,5 +11,7 @@
   <div class="recipes-container">
     <h4 *ngIf="searching">Loading recipes...</h4>
     <app-recipe *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe>
+    <app-load-more *ngIf="thereAreMoreRecipes && recipes?.length" (loadMore)="doLoadMore()" [margin]="200">
+    </app-load-more>
   </div>
 </main>
