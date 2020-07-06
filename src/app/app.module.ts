@@ -5,11 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeComponent } from './components/recipe/recipe.component';
+import { LoadMoreComponent } from './components/load-more/load-more.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeComponent
+    RecipeComponent,
+    LoadMoreComponent
   ],
   imports: [
     BrowserModule,
