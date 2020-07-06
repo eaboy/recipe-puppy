@@ -8,4 +8,8 @@
     <p><sup>*</sup>Exclude an ingredient preceding it by a hyphen</p>
     <button type="submit" [disabled]="searching">Search</button>
   </form>
+  <div class="recipes-container">
+    <h4 *ngIf="searching">Loading recipes...</h4>
+    <app-recipe *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe>
+  </div>
 </main>
