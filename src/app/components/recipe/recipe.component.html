@@ -1,1 +1,10 @@
-<p>recipe works!</p>
+<div class="recipe">
+  <div class="recipe-info">
+    <h4>{{recipe.title}}</h4><a [href]="recipe.href" target="_blank">View</a>
+    <div class="ingredients">
+      <p>Ingredients:</p>
+      <span class="ingredient" *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</span>
+    </div>
+  </div>
+  <img [src]="recipe.thumbnail" [alt]="recipe.title">
+</div>
