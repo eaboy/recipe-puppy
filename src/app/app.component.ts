@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Recipe, SearchParams } from './interfaces/recipe.interfaces';
 import { CommunicationService } from './services/communication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,10 @@ export class AppComponent {
     ingredients: new FormControl()
   });
 
-  constructor(private communicationService: CommunicationService) { }
+  constructor(
+    private communicationService: CommunicationService,
+    private router: Router,
+  ) { }
 
   doSearch(): void {
     this.searching = true;
@@ -44,6 +48,9 @@ export class AppComponent {
       this.searching = false;
       this.recipes = this.recipes.concat(recipes);
     });
+    if (searchParams.course || searchParams.ingredients || searchParams.page !== 1) {
+      this.router.navigate([], { queryParams: searchParams });
+    }
   }
 
   doLoadMore(): void {

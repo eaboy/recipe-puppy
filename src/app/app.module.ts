@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { LoadMoreComponent } from './components/load-more/load-more.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoadMoreComponent } from './components/load-more/load-more.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]
